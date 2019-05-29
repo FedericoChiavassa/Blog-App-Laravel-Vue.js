@@ -35,3 +35,9 @@ Route::delete('posts/{id}', 'PostController@destroy');
 
 // Register new user
 Route::post('register', 'Auth\RegisterController@register');
+
+// Login user
+Route::post('login', 'Auth\LoginController@login');
+
+// Logout user
+Route::post('logout', 'Auth\LoginController@logout');
