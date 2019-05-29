@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         // Get posts
-        $posts = Post::paginate(10);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
 
         // Return collection of posts as a resource
         return PostResource::collection($posts);
@@ -86,10 +86,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         // Delete post
-        $post = Article::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         if($post->delete()) {
-            return new ArticleResource($post);
+            return new PostResource($post);
         }
     }
 }
