@@ -70,7 +70,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'api_token' => Str::random(60),
         ]);
     }
 
@@ -83,6 +82,8 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
+        $user->generateToken();
+
         // Return registered user
         return new UserResource($user);
     }
