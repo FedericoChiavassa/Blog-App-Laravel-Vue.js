@@ -36,6 +36,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->author = $request->input('author');
 
         if($post->save()) {
             return new PostResource($post);
@@ -66,11 +67,14 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Update existing post
+        // Find post to update
         $post = Post::findOrFail($id);
 
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
+        // Check for correct user
+        if(auth()->user()->id === $post->author) {
+            $post->title = $request->input('title');
+            $post->body = $request->input('body');
+        } 
 
         if($post->save()) {
             return new PostResource($post);
@@ -85,11 +89,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        // Delete post
+        // Find post to delete
         $post = Post::findOrFail($id);
 
-        if($post->delete()) {
-            return new PostResource($post);
+        // Check for correct user
+        if(auth()->user()->id === $post->author) {
+            if($post->delete()) {
+                return new PostResource($post);
+            }
         }
     }
 }
