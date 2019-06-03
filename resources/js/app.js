@@ -5,9 +5,10 @@
  */
 
 require('./bootstrap');
-import router from './router';
-
 window.Vue = require('vue');
+
+import router from './router';
+import store from './store';
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,6 +32,7 @@ Vue.component('vue-app', require('./App.vue').default);
 const app = new Vue({
     el: '#app',
     router: router,
+    store: store,
 });
 
 export default app;
