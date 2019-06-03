@@ -1,10 +1,10 @@
 <template>
     <div class="posts-list">
-      <div
-        v-for="post in allPosts"
-        :key="post.id"
-        class="post"
-      >- {{ post.title }}</div>
+        <b-list-group >
+            <b-list-group-item v-for="post in allPosts" :key="post.id">         
+                <b-link href="#">{{ post.title }}</b-link>
+            </b-list-group-item>
+        </b-list-group>
     </div>
 </template>
 

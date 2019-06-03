@@ -9,6 +9,9 @@ window.Vue = require('vue');
 
 import router from './router';
 import store from './store';
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +23,9 @@ import store from './store';
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+
+Vue.use(BootstrapVue);
+
 
 Vue.component('vue-app', require('./App.vue').default);
 

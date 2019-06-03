@@ -81,12 +81,25 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "posts-list" },
-    _vm._l(_vm.allPosts, function(post) {
-      return _c("div", { key: post.id, staticClass: "post" }, [
-        _vm._v("- " + _vm._s(post.title))
-      ])
-    }),
-    0
+    [
+      _c(
+        "b-list-group",
+        _vm._l(_vm.allPosts, function(post) {
+          return _c(
+            "b-list-group-item",
+            { key: post.id },
+            [
+              _c("b-link", { attrs: { href: "#" } }, [
+                _vm._v(_vm._s(post.title))
+              ])
+            ],
+            1
+          )
+        }),
+        1
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
