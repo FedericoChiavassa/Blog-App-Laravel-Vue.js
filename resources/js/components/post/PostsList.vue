@@ -1,8 +1,9 @@
 <template>
     <div class="posts-list">
-        <b-list-group >
+        <b-spinner v-if="isLoading" label="Loading..." variant="primary"></b-spinner>
+        <b-list-group v-else>
             <b-list-group-item v-for="post in allPosts" :key="post.id">         
-                <b-link href="#">{{ post.title }}</b-link>
+                <b-link :to="`/posts/${post.id}`">{{ post.title }}</b-link>
             </b-list-group-item>
         </b-list-group>
     </div>
@@ -16,7 +17,7 @@ export default {
   methods: {
     ...mapActions(["fetchPosts"])
   },
-  computed: mapGetters(["allPosts"]),
+  computed: mapGetters(["allPosts", "isLoading"]),
   created() {
     this.fetchPosts();
   }

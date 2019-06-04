@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/post/PostDetails.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
@@ -21,23 +21,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetails",
   props: ['postId'],
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["fetchPost", "clearPostState"])),
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["singlePost", "isLoading"]),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["fetchPost"])),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["singlePost"]),
   created: function created() {
-    this.fetchPost(this.postId);
-  },
-  destroyed: function destroyed() {
-    this.clearPostState();
+    this.fetchPost(16);
   }
 });
 
@@ -58,34 +49,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "post-details" },
-    [
-      _vm.isLoading
-        ? _c("b-spinner", {
-            attrs: { label: "Loading...", variant: "primary" }
-          })
-        : _c("div", [
-            _c("h1", [_vm._v(_vm._s(_vm.singlePost.title))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.singlePost.body))]),
-            _vm._v(" "),
-            _c("small", [_vm._v("Author: " + _vm._s(_vm.singlePost.author))]),
-            _c("br"),
-            _vm._v(" "),
-            _c("small", [
-              _vm._v("Created: " + _vm._s(_vm.singlePost.created_at))
-            ]),
-            _c("br"),
-            _vm._v(" "),
-            _c("small", [
-              _vm._v("Last update: " + _vm._s(_vm.singlePost.updated_at))
-            ])
-          ])
-    ],
-    1
-  )
+  return _c("div", { staticClass: "post-detail" }, [
+    _c("h1", [_vm._v("post title: " + _vm._s(_vm.singlePost.title))])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

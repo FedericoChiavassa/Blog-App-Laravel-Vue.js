@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"about":"about"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"about":"about","posts":"posts"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -82859,7 +82859,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/posts',
     name: 'posts',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Posts.vue */ "./resources/js/views/Posts.vue"));
+      return __webpack_require__.e(/*! import() | posts */ "posts").then(__webpack_require__.bind(null, /*! ./views/Posts.vue */ "./resources/js/views/Posts.vue"));
+    }
+  }, {
+    path: '/posts/:id',
+    name: 'post',
+    props: true,
+    component: function component() {
+      return __webpack_require__.e(/*! import() | posts */ "posts").then(__webpack_require__.bind(null, /*! ./views/Post.vue */ "./resources/js/views/Post.vue"));
     }
   }]
 }));
@@ -82914,11 +82921,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var state = {
-  posts: []
+  posts: [],
+  post: {},
+  isLoading: false
 };
 var getters = {
   allPosts: function allPosts(state) {
     return state.posts;
+  },
+  singlePost: function singlePost(state) {
+    return state.post;
+  },
+  isLoading: function isLoading(state) {
+    return state.isLoading;
   }
 };
 var actions = {
@@ -82932,14 +82947,15 @@ var actions = {
           switch (_context.prev = _context.next) {
             case 0:
               commit = _ref.commit;
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/posts');
+              commit('setLoading');
+              _context.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/posts');
 
-            case 3:
+            case 4:
               response = _context.sent;
               commit('setPosts', response.data.data);
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -82952,11 +82968,56 @@ var actions = {
     }
 
     return fetchPosts;
-  }()
+  }(),
+  fetchPost: function () {
+    var _fetchPost = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, id) {
+      var commit, response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              commit = _ref2.commit;
+              commit('setLoading');
+              _context2.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts/".concat(id));
+
+            case 4:
+              response = _context2.sent;
+              commit('setPost', response.data);
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    function fetchPost(_x2, _x3) {
+      return _fetchPost.apply(this, arguments);
+    }
+
+    return fetchPost;
+  }(),
+  clearPostState: function clearPostState(_ref3) {
+    var commit = _ref3.commit;
+    commit('clearPostState');
+  }
 };
 var mutations = {
   setPosts: function setPosts(state, posts) {
-    return state.posts = posts;
+    return state.posts = posts, state.isLoading = false;
+  },
+  setPost: function setPost(state, post) {
+    return state.post = post, state.isLoading = false;
+  },
+  clearPostState: function clearPostState(state) {
+    return state.posts = [], state.post = {};
+  },
+  setLoading: function setLoading(state) {
+    return state.isLoading = true;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

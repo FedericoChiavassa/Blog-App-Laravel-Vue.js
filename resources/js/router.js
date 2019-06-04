@@ -23,7 +23,13 @@ export default new Router({
     {
         path: '/posts',
         name: 'posts',
-        component: () => import('./views/Posts.vue')
+        component: () => import(/* webpackChunkName: "posts" */ './views/Posts.vue')
+    },
+    {
+        path: '/posts/:id',
+        name: 'post',
+        props: true,
+        component: () => import(/* webpackChunkName: "posts" */ './views/Post.vue')
     }
     ]
 })
