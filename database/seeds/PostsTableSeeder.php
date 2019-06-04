@@ -15,6 +15,6 @@ class PostsTableSeeder extends Seeder
         DB::table('posts')->truncate();
         
         // Creates new posts
-        factory(App\Post::class, 15)->create();
+        factory(App\Post::class, 30)->create();
     }
 }

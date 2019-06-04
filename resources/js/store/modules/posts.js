@@ -3,24 +3,29 @@ import axios from 'axios';
 const state = {
   posts: [],
   post: {},
-  isLoading: false
+  isLoading: false,
+  pagination: {
+    totPages: 9999,
+  }
 };
 
 const getters = {
   allPosts: state => state.posts,
   singlePost: state => state.post,
-  isLoading: state => state.isLoading
+  isLoading: state => state.isLoading,
+  pagination: state => state.pagination
 };
 
 const actions = {
-  async fetchPosts({ commit }) {
+  async fetchPosts({ commit }, page) {
     commit('setLoading');
 
     const response = await axios.get(
-      '/api/posts'
+      `api/posts?page=${page}`
     );
 
     commit('setPosts', response.data.data);
+    commit('setPagination', response.data.meta);
   },
   async fetchPost({ commit }, id) {
     commit('setLoading');
@@ -49,7 +54,12 @@ const mutations = {
         state.posts = [],
         state.post = {}
     ),
-    setLoading: state => (state.isLoading = true)
+    setLoading: state => (
+        state.isLoading = true
+    ),
+    setPagination: (state, meta) => (
+        state.pagination.totPages = meta.last_page
+    )
 
 };
 

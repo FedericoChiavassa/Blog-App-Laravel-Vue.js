@@ -14,14 +14,21 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "PostsList",
+  props: ["page"],
   methods: {
     ...mapActions(["fetchPosts"])
   },
   computed: mapGetters(["allPosts", "isLoading"]),
   created() {
-    this.fetchPosts();
+    this.fetchPosts(this.page);
+  },
+  watch: {
+    '$route' (to, from) {
+      // react to route changes...
+      this.fetchPosts(this.page);
+    }
   }
-};
+}
 </script>
 
 <style>

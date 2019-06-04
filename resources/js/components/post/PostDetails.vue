@@ -2,7 +2,7 @@
     <div class="post-details">
         <b-spinner v-if="isLoading" label="Loading..." variant="primary"></b-spinner>
         <div v-else>
-            <h1>{{ singlePost.title }}</h1>
+            <h1 class="mb-4">{{ singlePost.title }}</h1>
             <p>{{ singlePost.body }}</p>
             <small>Author: {{ singlePost.author }}</small><br>
             <small>Created: {{ singlePost.created_at }}</small><br>

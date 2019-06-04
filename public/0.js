@@ -67,7 +67,9 @@ var render = function() {
             attrs: { label: "Loading...", variant: "primary" }
           })
         : _c("div", [
-            _c("h1", [_vm._v(_vm._s(_vm.singlePost.title))]),
+            _c("h1", { staticClass: "mb-4" }, [
+              _vm._v(_vm._s(_vm.singlePost.title))
+            ]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.singlePost.body))]),
             _vm._v(" "),

@@ -45,7 +45,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "about" } }, [
-      _c("h1", [_vm._v("About")]),
+      _c("h1", { staticClass: "mb-3" }, [_vm._v("About")]),
       _vm._v(" "),
       _c("p", [_vm._v("This is the About Page.")])
     ])

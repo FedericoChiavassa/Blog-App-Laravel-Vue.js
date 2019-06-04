@@ -66708,7 +66708,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "home" } }, [
-      _c("h1", [_vm._v("Home")]),
+      _c("h1", { staticClass: "mb-3" }, [_vm._v("Home")]),
       _vm._v(" "),
       _c("p", [_vm._v("This is the Home Page.")])
     ])
@@ -82923,7 +82923,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var state = {
   posts: [],
   post: {},
-  isLoading: false
+  isLoading: false,
+  pagination: {
+    totPages: 9999
+  }
 };
 var getters = {
   allPosts: function allPosts(state) {
@@ -82934,13 +82937,16 @@ var getters = {
   },
   isLoading: function isLoading(state) {
     return state.isLoading;
+  },
+  pagination: function pagination(state) {
+    return state.pagination;
   }
 };
 var actions = {
   fetchPosts: function () {
     var _fetchPosts = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, page) {
       var commit, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -82949,13 +82955,14 @@ var actions = {
               commit = _ref.commit;
               commit('setLoading');
               _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/posts');
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/posts?page=".concat(page));
 
             case 4:
               response = _context.sent;
               commit('setPosts', response.data.data);
+              commit('setPagination', response.data.meta);
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -82963,7 +82970,7 @@ var actions = {
       }, _callee);
     }));
 
-    function fetchPosts(_x) {
+    function fetchPosts(_x, _x2) {
       return _fetchPosts.apply(this, arguments);
     }
 
@@ -82995,7 +83002,7 @@ var actions = {
       }, _callee2);
     }));
 
-    function fetchPost(_x2, _x3) {
+    function fetchPost(_x3, _x4) {
       return _fetchPost.apply(this, arguments);
     }
 
@@ -83018,6 +83025,9 @@ var mutations = {
   },
   setLoading: function setLoading(state) {
     return state.isLoading = true;
+  },
+  setPagination: function setPagination(state, meta) {
+    return state.pagination.totPages = meta.last_page;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
