@@ -4,9 +4,11 @@
         <div v-else>
             <h1 class="mb-4">{{ singlePost.title }}</h1>
             <p>{{ singlePost.body }}</p>
-            <small>Author: {{ singlePost.author }}</small><br>
-            <small>Created: {{ singlePost.created_at }}</small><br>
-            <small>Last update: {{ singlePost.updated_at }}</small>
+            <footer class="mb-5">
+                <small>Author: {{ singlePost.author }}</small><br>
+                <small>Created: {{ singlePost.created_at }}</small><br>
+                <small>Last update: {{ singlePost.updated_at }}</small>
+            </footer>
         </div>
     </div>
 </template>

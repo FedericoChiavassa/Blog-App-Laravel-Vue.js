@@ -88,11 +88,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Post',
   components: {
     PostDetails: function PostDetails() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/post/PostDetails */ "./resources/js/components/post/PostDetails.vue"));
+    }
+  },
+  methods: {
+    goBack: function goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/posts');
     }
   }
 });
@@ -237,7 +243,19 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "post-page" } },
-    [_c("PostDetails", { attrs: { postId: _vm.$route.params.id } })],
+    [
+      _c(
+        "b-button",
+        {
+          staticClass: "mb-4",
+          attrs: { size: "sm" },
+          on: { click: _vm.goBack }
+        },
+        [_vm._v("← Go Back")]
+      ),
+      _vm._v(" "),
+      _c("PostDetails", { attrs: { postId: _vm.$route.params.id } })
+    ],
     1
   )
 }

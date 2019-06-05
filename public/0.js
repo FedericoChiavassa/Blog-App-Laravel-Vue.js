@@ -27,6 +27,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostDetails",
@@ -73,16 +75,18 @@ var render = function() {
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.singlePost.body))]),
             _vm._v(" "),
-            _c("small", [_vm._v("Author: " + _vm._s(_vm.singlePost.author))]),
-            _c("br"),
-            _vm._v(" "),
-            _c("small", [
-              _vm._v("Created: " + _vm._s(_vm.singlePost.created_at))
-            ]),
-            _c("br"),
-            _vm._v(" "),
-            _c("small", [
-              _vm._v("Last update: " + _vm._s(_vm.singlePost.updated_at))
+            _c("footer", { staticClass: "mb-5" }, [
+              _c("small", [_vm._v("Author: " + _vm._s(_vm.singlePost.author))]),
+              _c("br"),
+              _vm._v(" "),
+              _c("small", [
+                _vm._v("Created: " + _vm._s(_vm.singlePost.created_at))
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("small", [
+                _vm._v("Last update: " + _vm._s(_vm.singlePost.updated_at))
+              ])
             ])
           ])
     ],

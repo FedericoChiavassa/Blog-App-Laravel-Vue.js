@@ -24,4 +24,8 @@ export default {
 </script>
 
 <style>
+.navbar .router-link-active {
+    color: #fff !important
+}
+
 </style>
