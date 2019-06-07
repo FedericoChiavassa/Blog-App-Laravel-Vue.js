@@ -11,6 +11,11 @@
                     <b-nav-item to="/posts">Posts</b-nav-item>
                     <b-nav-item to="/about">About</b-nav-item>
                 </b-navbar-nav>
+
+                <b-navbar-nav class="ml-auto" v-if="!loadingUser">
+                    <b-nav-item to="/login" v-if="!isAuthenticated">Login</b-nav-item>
+                    <b-nav-item @click="logout()" v-if="isAuthenticated">Logout</b-nav-item>
+                </b-navbar-nav>
             </b-collapse>
         </div>
     </b-navbar>
@@ -18,8 +23,14 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  computed: mapGetters(["isAuthenticated", "loadingUser"]),
+  methods: {
+      ...mapActions(["logout"])
+    }
 }
 </script>
 

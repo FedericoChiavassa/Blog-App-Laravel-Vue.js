@@ -9,12 +9,19 @@
 
 <script>
 import Navbar from './components/layout/Navbar';
+import { mapGetters, mapActions } from "vuex";
+
 export default {
     name:"app",
     components: {
         Navbar
+    },
+    methods: {
+      ...mapActions(["loadUser"])
+    },
+    created() {
+        this.loadUser();
     }
-
 }
 </script>
 

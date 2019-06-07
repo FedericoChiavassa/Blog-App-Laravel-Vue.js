@@ -30,6 +30,11 @@ export default new Router({
         name: 'post',
         props: true,
         component: () => import(/* webpackChunkName: "posts" */ './views/Post.vue')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue')
     }
     ]
 })

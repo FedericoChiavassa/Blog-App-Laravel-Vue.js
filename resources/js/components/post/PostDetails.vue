@@ -26,7 +26,7 @@ export default {
   created() {
     this.fetchPost(this.postId);
   },
-  destroyed() {
+  beforeDestroy() {
     this.clearPostState();
   }
 };

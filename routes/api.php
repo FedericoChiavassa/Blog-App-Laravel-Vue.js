@@ -29,9 +29,15 @@ Route::post('register', 'Auth\RegisterController@register');
 // Login user
 Route::post('login', 'Auth\LoginController@login');
 
-// Protected routes
-Route::group(['middleware' => 'auth:api'], function() {
+// Get user info
+Route::get('auth/user', 'Auth\LoginController@getUser');
 
+// Logout user
+Route::post('logout', 'Auth\LoginController@logout');
+
+// Protected routes
+Route::group(['middleware' => 'auth:api'], function() {    
+    
     // Create new post
     Route::post('posts', 'PostController@store');
 
@@ -41,7 +47,5 @@ Route::group(['middleware' => 'auth:api'], function() {
     // Delete post
     Route::delete('posts/{id}', 'PostController@destroy');
 
-    // Logout user
-    Route::post('logout', 'Auth\LoginController@logout');
 
 });

@@ -18,7 +18,7 @@ const getters = {
 
 const actions = {
   async fetchPosts({ commit }, page) {
-    commit('setLoading');
+    commit('setPostLoading');
 
     const response = await axios.get(
       `api/posts?page=${page}`
@@ -28,13 +28,13 @@ const actions = {
     commit('setPagination', response.data.meta);
   },
   async fetchPost({ commit }, id) {
-    commit('setLoading');
+    commit('setPostLoading');
 
     const response = await axios.get(
         `/api/posts/${id}`
     );
 
-    commit('setPost', response.data);
+    commit('setPostDetails', response.data);
   },
   clearPostState({ commit }) {
       commit('clearPostState')
@@ -46,7 +46,7 @@ const mutations = {
         state.posts = posts,
         state.isLoading = false
         ),
-    setPost: (state, post) => (
+    setPostDetails: (state, post) => (
         state.post = post,
         state.isLoading = false
         ),
@@ -54,7 +54,7 @@ const mutations = {
         state.posts = [],
         state.post = {}
     ),
-    setLoading: state => (
+    setPostLoading: state => (
         state.isLoading = true
     ),
     setPagination: (state, meta) => (

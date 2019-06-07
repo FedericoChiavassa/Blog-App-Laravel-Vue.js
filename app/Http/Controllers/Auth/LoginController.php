@@ -65,4 +65,10 @@ class LoginController extends Controller
 
         return response()->json('User logged out.');
     }
+
+    public function getUser(Request $request) {
+        $user = Auth::guard('api')->user();
+
+        return new UserResource($user);
+    }
 }

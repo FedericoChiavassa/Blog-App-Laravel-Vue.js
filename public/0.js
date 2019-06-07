@@ -38,7 +38,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.fetchPost(this.postId);
   },
-  destroyed: function destroyed() {
+  beforeDestroy: function beforeDestroy() {
     this.clearPostState();
   }
 });
