@@ -54,6 +54,11 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return response()->json('Login Failed', 400);   
+    }
+
     public function logout(Request $request)
     {
         $user = Auth::guard('api')->user();
@@ -69,6 +74,11 @@ class LoginController extends Controller
     public function getUser(Request $request) {
         $user = Auth::guard('api')->user();
 
-        return new UserResource($user);
+        if($user){
+            return new UserResource($user);
+        }
+        else {
+            return response()->json("User not found", 404);
+        }
     }
 }

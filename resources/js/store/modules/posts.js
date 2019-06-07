@@ -24,8 +24,7 @@ const actions = {
       `api/posts?page=${page}`
     );
 
-    commit('setPosts', response.data.data);
-    commit('setPagination', response.data.meta);
+    commit('setPosts', response.data);
   },
   async fetchPost({ commit }, id) {
     commit('setPostLoading');
@@ -42,8 +41,9 @@ const actions = {
 };
 
 const mutations = {
-    setPosts: (state, posts) => (
-        state.posts = posts,
+    setPosts: (state, res) => (
+        state.posts = res.data,
+        state.pagination.totPages = res.meta.last_page,
         state.isLoading = false
         ),
     setPostDetails: (state, post) => (
@@ -56,11 +56,7 @@ const mutations = {
     ),
     setPostLoading: state => (
         state.isLoading = true
-    ),
-    setPagination: (state, meta) => (
-        state.pagination.totPages = meta.last_page
     )
-
 };
 
 export default {

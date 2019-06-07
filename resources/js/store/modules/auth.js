@@ -16,28 +16,34 @@ const getters = {
 const actions = {
     async login({ commit }, user) {
         commit('setUserLoading');
-
-        const response = await axios.post(
-            '/api/login', user
-        );
-
-        commit('setUser', response.data);
+        try {
+            const response = await axios.post(
+                '/api/login', user
+            );
+            commit('setUser', response.data);
+        }
+        catch(err) {
+            commit('clearUser', err.response.data) 
+        }
     },
     async loadUser({ commit }) {
         commit('setUserLoading');
-
-        const response = await axios.get(
-            '/api/auth/user', tokenConfig()
-        );
-
-        commit('loadUser', response.data);
+        try {
+            const response = await axios.get(
+                '/api/auth/user', tokenConfig()
+            );
+            commit('setUser', response.data)
+        }
+        catch(err) {
+            commit('clearUser', err.response.data) 
+        }
     },
     async logout({ commit }) {
         const response = await axios.post(
             '/api/logout', tokenConfig()
         );
         
-        commit('logoutUser', response.data);
+        commit('clearUser', response.data);
     },
 };
 
@@ -49,20 +55,15 @@ const mutations = {
         state.isAuthenticated = true,
         state.isLoading = false
     ),
-    loadUser: (state, user) => (
-        state.token = user.api_token,
-        state.user = user,
-        state.isAuthenticated = true,
-        state.isLoading = false
-    ),
     setUserLoading: state => (
         state.isLoading = true
     ),
-    logoutUser: state => (
+    clearUser: (state) => (
         localStorage.token = null,
         state.isAuthenticated = false,
         state.user = null,
-        state.token = null
+        state.token = null,
+        state.isLoading = false
     )
 };
 
