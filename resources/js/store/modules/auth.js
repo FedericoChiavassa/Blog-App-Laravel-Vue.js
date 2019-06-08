@@ -10,7 +10,8 @@ const state = {
 const getters = {
     isAuthenticated: state => state.isAuthenticated,
     loadingUser: state => state.isLoading,
-    token: state => state.token
+    token: state => state.token,
+    user: state => state.user
 };
 
 const actions = {
