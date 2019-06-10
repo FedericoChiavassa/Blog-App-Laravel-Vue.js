@@ -43,23 +43,11 @@ export default {
             }
         }
     },
-    computed: mapGetters(["token", "isAuthenticated"]),
     methods: {
+        ...mapActions(["login"]),
         onSubmit(evt) {
             evt.preventDefault()
             this.login(this.user)
-        },
-        ...mapActions(["login", "setMessage"])
-    },
-    beforeMount() {
-        // this.token ? this.$router.push('/') : null
-    },
-    watch: {
-        isAuthenticated: function ({ commit }) {
-            if(this.isAuthenticated)  {
-                 this.$router.push('/');
-                 this.setMessage({"success": "Login Successful"});      
-            }
         }
     }
 }

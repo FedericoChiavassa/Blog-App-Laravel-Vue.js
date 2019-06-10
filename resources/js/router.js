@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store';
 import Home from './views/Home.vue'
 
 Vue.use(Router)
@@ -34,7 +35,30 @@ export default new Router({
     {
         path: '/login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue')
+        component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue'),
+        beforeEnter: noUserRequired
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: () => import(/* webpackChunkName: "auth" */ './views/Dashboard.vue'),
+        beforeEnter: authRequired
     }
     ]
 })
+
+function authRequired(to, from, next) {
+    if (store.getters.isAuthenticated !== true) next('/login');
+    next();
+}
+
+function noUserRequired(to, from, next) {
+    store.dispatch( 'loadUser' );
+    store.watch(() => store.getters.loadingUser, function() {
+        if ( store.getters.loadingUser === false ) {
+            store.getters.isAuthenticated === true ? next('/dashboard') : next();
+        }
+    });
+}
+
+

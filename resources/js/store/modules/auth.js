@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../../router';
 
 const state = {
     token: localStorage.token,
@@ -9,8 +10,7 @@ const state = {
 
 const getters = {
     isAuthenticated: state => state.isAuthenticated,
-    loadingUser: state => state.isLoading,
-    token: state => state.token,
+    loadingUser: state =>  state.isLoading,
     user: state => state.user
 };
 
@@ -22,6 +22,8 @@ const actions = {
                 '/api/login', user
             );
             commit('setUser', response.data);
+            router.push('/dashboard');
+            commit('setMessage', {"success": "Login Successful"}); 
         }
         catch(err) {
             commit('clearUser');
@@ -46,6 +48,7 @@ const actions = {
         );
         
         commit('clearUser');
+        router.push('/');
         commit('setMessage', response.data);
     },
 };
