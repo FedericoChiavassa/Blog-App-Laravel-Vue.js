@@ -46,17 +46,20 @@ export default {
     computed: mapGetters(["token", "isAuthenticated"]),
     methods: {
         onSubmit(evt) {
-        evt.preventDefault()
-        this.login(this.user)
+            evt.preventDefault()
+            this.login(this.user)
         },
-        ...mapActions(["login"])
+        ...mapActions(["login", "setMessage"])
     },
     beforeMount() {
-        this.token ? this.$router.push('/') : null
+        // this.token ? this.$router.push('/') : null
     },
     watch: {
-        isAuthenticated: function () {
-            this.isAuthenticated  ? this.$router.push('/') : null
+        isAuthenticated: function ({ commit }) {
+            if(this.isAuthenticated)  {
+                 this.$router.push('/');
+                 this.setMessage({"success": "Login Successful"});      
+            }
         }
     }
 }

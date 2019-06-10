@@ -24,7 +24,8 @@ const actions = {
             commit('setUser', response.data);
         }
         catch(err) {
-            commit('clearUser', err.response.data) 
+            commit('clearUser');
+            commit('setMessage', err.response.data);
         }
     },
     async loadUser({ commit }) {
@@ -36,7 +37,7 @@ const actions = {
             commit('setUser', response.data)
         }
         catch(err) {
-            commit('clearUser', err.response.data) 
+            commit('clearUser') 
         }
     },
     async logout({ commit }) {
@@ -44,7 +45,8 @@ const actions = {
             '/api/logout', tokenConfig()
         );
         
-        commit('clearUser', response.data);
+        commit('clearUser');
+        commit('setMessage', response.data);
     },
 };
 

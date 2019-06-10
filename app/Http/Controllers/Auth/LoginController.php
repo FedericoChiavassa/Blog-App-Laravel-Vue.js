@@ -56,7 +56,7 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        return response()->json('Login Failed', 400);   
+        return response()->json(['error' => 'Invalid Credentials'], 400);
     }
 
     public function logout(Request $request)
@@ -68,7 +68,7 @@ class LoginController extends Controller
             $user->save();
         }
 
-        return response()->json('User logged out.');
+        return response()->json(['success' => 'User logged out'], 200);
     }
 
     public function getUser(Request $request) {
