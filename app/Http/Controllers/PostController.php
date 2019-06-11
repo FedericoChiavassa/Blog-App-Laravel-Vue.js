@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Post;
 use App\Http\Resources\Post as PostResource;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -36,7 +37,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->author = $request->input('author');
+        $post->user_id = $request->input('user_id');
 
         if($post->save()) {
             return new PostResource($post);
@@ -98,5 +99,19 @@ class PostController extends Controller
                 return new PostResource($post);
             }
         }
+    }
+
+    /**
+     * Display user posts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userPosts(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+
+        $posts = $user->posts;
+
+        return PostResource::collection($posts);
     }
 }

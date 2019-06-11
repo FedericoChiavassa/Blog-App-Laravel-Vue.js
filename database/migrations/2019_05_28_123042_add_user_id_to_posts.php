@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAuthorToPosts extends Migration
+class AddUserIdToPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAuthorToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedInteger('author');
+            $table->unsignedInteger('user_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAuthorToPosts extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('author');
+            $table->dropColumn('user_id');
         });
     }
 }

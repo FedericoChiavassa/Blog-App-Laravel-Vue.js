@@ -3,7 +3,6 @@
         <Navbar />    
         <div class="container mt-5">
             <Message v-if="msg" class="mb-4"/>
-            <!-- <Message class="mb-4"/> -->
             <router-view/>
         </div>
     </div>
@@ -12,7 +11,7 @@
 <script>
 import Navbar from './components/layout/Navbar';
 import Message from './components/layout/Message';
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     name:"app",
@@ -20,13 +19,7 @@ export default {
         Navbar,
         Message
     },
-    computed: mapGetters(["msg"]),
-    methods: {
-      ...mapActions(["loadUser"])
-    },
-    created() {
-        this.loadUser();
-    }
+    computed: mapGetters(["msg"])
 }
 </script>
 

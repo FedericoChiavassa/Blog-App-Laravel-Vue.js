@@ -7,6 +7,7 @@ Vue.use(Router)
 
 export default new Router({
     mode: 'history',
+    beforeRoutes: store.dispatch('loadUser'),
     routes: [
     {
         path: '/',
@@ -35,30 +36,41 @@ export default new Router({
     {
         path: '/login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue'),
-        beforeEnter: noUserRequired
+        component: () => import(/* webpackChunkName: "login" */ './views/Login.vue'),
+        beforeEnter: checkUser
     },
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: () => import(/* webpackChunkName: "auth" */ './views/Dashboard.vue'),
-        beforeEnter: authRequired
+        component: () => import(/* webpackChunkName: "dashboard" */ './views/Dashboard.vue'),
+        beforeEnter: authRequired,
     }
     ]
 })
 
-function authRequired(to, from, next) {
-    if (store.getters.isAuthenticated !== true) next('/login');
-    next();
+function checkUser(to, from, next) {
+    if ( store.getters.loadingUser ) {
+        store.watch(() => store.getters.loadingUser, function() {
+            if ( store.getters.loadingUser === false ) {
+                store.getters.isAuthenticated === true ? next('/dashboard') : next();
+            }
+        });
+    }
+    else {
+        store.getters.isAuthenticated === true ? next('/dashboard') : next();
+    }
 }
 
-function noUserRequired(to, from, next) {
-    store.dispatch( 'loadUser' );
-    store.watch(() => store.getters.loadingUser, function() {
-        if ( store.getters.loadingUser === false ) {
-            store.getters.isAuthenticated === true ? next('/dashboard') : next();
-        }
-    });
+function authRequired (to, from, next) {
+    if ( store.getters.loadingUser ) {
+        store.watch(() => store.getters.loadingUser, function() {
+            if ( store.getters.loadingUser === false ) {
+                store.getters.isAuthenticated === true ? next() : next('/login');
+            }
+        });
+    }
+    else {
+        store.getters.isAuthenticated === true ? next() : next('/login');
+    }
 }
-
 

@@ -35,6 +35,9 @@ Route::get('auth/user', 'Auth\LoginController@getUser');
 // Logout user
 Route::post('logout', 'Auth\LoginController@logout');
 
+// User posts
+Route::get('user/posts', 'PostController@userPosts');
+
 // Protected routes
 Route::group(['middleware' => 'auth:api'], function() {    
     

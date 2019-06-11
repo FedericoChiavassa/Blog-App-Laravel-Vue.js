@@ -9,6 +9,6 @@ $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
-        'author' => 1
+        'user_id' => 1
     ];
 });

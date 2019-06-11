@@ -35,6 +35,15 @@ const actions = {
 
     commit('setPostDetails', response.data);
   },
+  async fetchUserPosts({ commit }, id) {
+    commit('setPostLoading');
+
+    const response = await axios.get(
+        '/api/user/posts', tokenConfig()
+    );
+
+    commit('setUserPosts', response.data);
+  },
   clearPostState({ commit }) {
       commit('clearPostState')
   }
@@ -44,6 +53,10 @@ const mutations = {
     setPosts: (state, res) => (
         state.posts = res.data,
         state.pagination.totPages = res.meta.last_page,
+        state.isLoading = false
+        ),
+    setUserPosts: (state, res) => (
+        state.posts = res,
         state.isLoading = false
         ),
     setPostDetails: (state, post) => (
@@ -64,4 +77,21 @@ export default {
   getters,
   actions,
   mutations
+};
+
+// Setup config/headers and token for request
+function tokenConfig () {
+    const token = localStorage.token;
+
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    }
+
+    if (token) {
+        config.headers['Authorization'] = 'Bearer ' + token;
+    }
+
+    return config;
 };
