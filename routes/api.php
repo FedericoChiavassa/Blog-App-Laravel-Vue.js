@@ -29,17 +29,17 @@ Route::post('register', 'Auth\RegisterController@register');
 // Login user
 Route::post('login', 'Auth\LoginController@login');
 
-// Get user info
-Route::get('auth/user', 'Auth\LoginController@getUser');
-
-// Logout user
-Route::post('logout', 'Auth\LoginController@logout');
-
-// User posts
-Route::get('user/posts', 'PostController@userPosts');
-
 // Protected routes
 Route::group(['middleware' => 'auth:api'], function() {    
+    
+    // Get user info
+    Route::get('auth/user', 'Auth\LoginController@getUser');
+    
+    // User posts
+    Route::get('user/posts', 'PostController@userPosts');
+    
+    // Logout user
+    Route::get('logout', 'Auth\LoginController@logout');
     
     // Create new post
     Route::post('posts', 'PostController@store');

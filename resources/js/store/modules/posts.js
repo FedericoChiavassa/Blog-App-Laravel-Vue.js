@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { tokenConfig } from './auth';
 
 const state = {
   posts: [],
@@ -77,21 +78,4 @@ export default {
   getters,
   actions,
   mutations
-};
-
-// Setup config/headers and token for request
-function tokenConfig () {
-    const token = localStorage.token;
-
-    const config = {
-        headers: {
-            "Content-type": "application/json"
-        }
-    }
-
-    if (token) {
-        config.headers['Authorization'] = 'Bearer ' + token;
-    }
-
-    return config;
 };

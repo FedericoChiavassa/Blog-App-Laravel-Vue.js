@@ -37,7 +37,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        $post->user_id = $request->input('user_id');
+        $post->user_id = Auth::guard('api')->user()->id;
 
         if($post->save()) {
             return new PostResource($post);
@@ -110,7 +110,7 @@ class PostController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        $posts = $user->posts;
+        $posts = $user->posts->sortByDesc('created_at');
 
         return PostResource::collection($posts);
     }

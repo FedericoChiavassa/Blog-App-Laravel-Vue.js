@@ -43,13 +43,20 @@ const actions = {
         }
     },
     async logout({ commit }) {
-        const response = await axios.post(
-            '/api/logout', tokenConfig()
-        );
-        
-        commit('clearUser');
-        router.push('/');
-        commit('setMessage', response.data);
+        try {
+            const response = await axios.get(
+                '/api/logout', tokenConfig()
+            );
+            
+            commit('clearUser');
+            router.push('/');
+            commit('setMessage', response.data);
+        }
+        catch(err) {
+            commit('clearUser');
+            router.push('/');
+            commit('setMessage', {"success": "User logged out"});
+        }
     },
 };
 
@@ -81,7 +88,7 @@ export default {
 };
 
 // Setup config/headers and token for request
-function tokenConfig () {
+export function tokenConfig () {
     const token = localStorage.token;
 
     const config = {
@@ -91,7 +98,7 @@ function tokenConfig () {
     }
 
     if (token) {
-        config.headers['Authorization'] = 'Bearer ' + token;
+        config.headers["Authorization"] = "Bearer " + token;
     }
 
     return config;
