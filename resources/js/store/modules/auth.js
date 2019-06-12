@@ -30,6 +30,21 @@ const actions = {
             commit('setMessage', err.response.data);
         }
     },
+    async register({ commit }, user) {
+        commit('setUserLoading');
+        try {
+            const response = await axios.post(
+                '/api/register', user
+            );
+            commit('setUser', response.data);
+            router.push('/dashboard');
+            commit('setMessage', {"success": "Registration Successful"}); 
+        }
+        catch(err) {
+            commit('clearUser');
+            commit('setMessage', err.response.data);
+        }
+    },
     async loadUser({ commit }) {
         commit('setUserLoading');
         try {

@@ -85,6 +85,6 @@ class RegisterController extends Controller
         $user->generateToken();
 
         // Return registered user
-        return new UserResource($user);
+        return $user;
     }
 }

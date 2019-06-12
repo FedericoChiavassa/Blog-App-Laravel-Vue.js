@@ -25,13 +25,13 @@
                 ></b-form-input>
             </b-form-group>
 
-            <b-button type="submit" variant="primary">Login</b-button>
+            <b-button type="submit" variant="primary" class="mt-3">Login</b-button>
         </b-form>
     </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "LoginForm",

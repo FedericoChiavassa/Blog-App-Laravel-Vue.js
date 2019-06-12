@@ -40,6 +40,12 @@ export default new Router({
         beforeEnter: checkUser
     },
     {
+        path: '/register',
+        name: 'register',
+        component: () => import(/* webpackChunkName: "register" */ './views/Register.vue'),
+        beforeEnter: checkUser
+    },
+    {
         path: '/dashboard',
         name: 'dashboard',
         component: () => import(/* webpackChunkName: "dashboard" */ './views/Dashboard.vue'),
