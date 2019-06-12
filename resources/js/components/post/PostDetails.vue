@@ -5,7 +5,7 @@
             <h1 class="mb-4">{{ singlePost.title }}</h1>
             <p>{{ singlePost.body }}</p>
             <footer class="mb-5">
-                <small>Author: {{ singlePost.author }}</small><br>
+                <small>Author: {{ singlePost.author.name }}</small><br>
                 <small>Created: {{ singlePost.created_at }}</small><br>
                 <small>Last update: {{ singlePost.updated_at }}</small>
             </footer>

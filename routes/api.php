@@ -29,11 +29,11 @@ Route::post('register', 'Auth\RegisterController@register');
 // Login user
 Route::post('login', 'Auth\LoginController@login');
 
+// Get user info
+Route::get('auth/user', 'Auth\LoginController@getUser');
+
 // Protected routes
 Route::group(['middleware' => 'auth:api'], function() {    
-    
-    // Get user info
-    Route::get('auth/user', 'Auth\LoginController@getUser');
     
     // User posts
     Route::get('user/posts', 'PostController@userPosts');

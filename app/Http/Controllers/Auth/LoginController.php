@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Resources\User as UserResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -48,7 +47,7 @@ class LoginController extends Controller
             $user = $this->guard()->user();
             $user->generateToken();
 
-            return new UserResource($user);
+            return $user;
         }
 
         return $this->sendFailedLoginResponse($request);
@@ -75,7 +74,7 @@ class LoginController extends Controller
         $user = Auth::guard('api')->user();
 
         if($user){
-            return new UserResource($user);
+            return $user;
         }
         else {
             return response()->json("User not found", 404);
