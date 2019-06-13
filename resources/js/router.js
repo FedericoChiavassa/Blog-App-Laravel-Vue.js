@@ -36,19 +36,19 @@ export default new Router({
     {
         path: '/login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "login" */ './views/Login.vue'),
+        component: () => import(/* webpackChunkName: "auth" */ './views/Login.vue'),
         beforeEnter: checkUser
     },
     {
         path: '/register',
         name: 'register',
-        component: () => import(/* webpackChunkName: "register" */ './views/Register.vue'),
+        component: () => import(/* webpackChunkName: "auth" */ './views/Register.vue'),
         beforeEnter: checkUser
     },
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ './views/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "auth" */ './views/Dashboard.vue'),
         beforeEnter: authRequired,
     }
     ]
@@ -79,4 +79,5 @@ function authRequired (to, from, next) {
         store.getters.isAuthenticated === true ? next() : next('/login');
     }
 }
+
 

@@ -19,8 +19,8 @@ const actions = {
 
 const mutations = {
     setMessage: (state, message) => (
-        state.msg = message.error ? message.error : message.success,
-        state.type = message.error ? "error" : "success"
+        state.msg = getText(message),
+        state.type = getType(message)
     ),
     clearMessage: state => (
         state.msg = "",
@@ -34,3 +34,21 @@ export default {
     actions,
     mutations
 };
+
+function getText(message) {
+    if(message.errors) {
+        return message.message
+    }
+    else {
+        return message.error ? message.error : message.success
+    }
+}
+
+function getType(message) {
+    if(message.errors) {
+        return "error"
+    }
+    else {
+        return message.error ? "error" : "success"
+    }
+}

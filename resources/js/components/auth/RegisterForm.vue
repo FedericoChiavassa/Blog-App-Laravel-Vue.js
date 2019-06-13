@@ -69,10 +69,15 @@ export default {
         }
     },
     methods: {
-        ...mapActions(["register"]),
+        ...mapActions(["register", "setMessage"]),
         onSubmit(evt) {
-            evt.preventDefault()
-            this.register(this.user)
+            evt.preventDefault();
+            if (this.user.password === this.user.password_confirmation) {
+                this.register(this.user);
+            }
+            else {
+                this.setMessage({"error": "Password confirmation doesn't match"});
+            }
         }
     }
 }
