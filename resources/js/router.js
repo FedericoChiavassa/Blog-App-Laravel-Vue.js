@@ -50,6 +50,12 @@ export default new Router({
         name: 'dashboard',
         component: () => import(/* webpackChunkName: "auth" */ './views/Dashboard.vue'),
         beforeEnter: authRequired,
+    },
+    {
+        path: '/create-post',
+        name: 'create-post',
+        component: () => import(/* webpackChunkName: "posts" */ './views/CreatePost.vue'),
+        beforeEnter: authRequired,
     }
     ]
 })

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../../router';
 import { tokenConfig } from './auth';
 
 const state = {
@@ -47,6 +48,21 @@ const actions = {
   },
   clearPostState({ commit }) {
       commit('clearPostState')
+  },
+  async createPost({ commit }, post) {
+      try {
+        const response = await axios.post(
+        'api/posts', post, tokenConfig()
+        );
+
+        console.log(response);
+    
+        router.push('/dashboard');
+        commit('setMessage', {"success": "Post Created"}); 
+      }
+      catch(err) {
+        commit('setMessage', err.response.data);
+      }
   }
 };
 
