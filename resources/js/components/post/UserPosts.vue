@@ -6,6 +6,11 @@
                 <b-link :to="`/posts/${post.id}`">{{ post.title }}</b-link>
                 <b-button 
                     size="sm" 
+                    variant="danger" 
+                    @click="deleteThis(post.id)"
+                >Delete</b-button>
+                <b-button 
+                    size="sm" 
                     variant="primary" 
                     :to="`/posts/${post.id}/edit`" 
                 >Edit Post</b-button>
@@ -20,7 +25,11 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "UserPosts",
   methods: {
-    ...mapActions(["fetchUserPosts"])
+    ...mapActions(["fetchUserPosts", "deletePost"]),
+    deleteThis(id) {
+        this.deletePost(id);
+        this.fetchUserPosts();
+    }
   },
   computed: mapGetters(["allPosts", "isLoading", "isAuthenticated"]),
   created() {
@@ -36,5 +45,6 @@ export default {
 
     .btn {
         float: right;
+        margin-left: 1rem;
     }
 </style>

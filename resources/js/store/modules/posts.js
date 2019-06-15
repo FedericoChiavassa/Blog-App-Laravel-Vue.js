@@ -75,6 +75,18 @@ const actions = {
         commit('setMessage', err.response.data);
         router.push('/posts');
       }
+  },
+  async deletePost({ commit }, id) {
+      try {
+        const response = await axios.delete(
+        `/api/posts/${id}`, tokenConfig()
+        );
+    
+        commit('setMessage', {"success": "Post Deleted"}); 
+      }
+      catch(err) {
+        commit('setMessage', err.response.data);
+      }
   }
 };
 
