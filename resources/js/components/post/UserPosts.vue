@@ -4,6 +4,11 @@
         <b-list-group v-else>
             <b-list-group-item v-for="post in allPosts" :key="post.id">         
                 <b-link :to="`/posts/${post.id}`">{{ post.title }}</b-link>
+                <b-button 
+                    size="sm" 
+                    variant="primary" 
+                    :to="`/posts/${post.id}/edit`" 
+                >Edit Post</b-button>
             </b-list-group-item>
         </b-list-group>
     </div>
@@ -17,15 +22,19 @@ export default {
   methods: {
     ...mapActions(["fetchUserPosts"])
   },
-  computed: mapGetters(["allPosts", "isLoading"]),
+  computed: mapGetters(["allPosts", "isLoading", "isAuthenticated"]),
   created() {
     this.fetchUserPosts();
   }
 }
 </script>
 
-<style>
-.list-group-item {
-    background-color: #f9f9f9
-}
+<style scoped>
+    .list-group-item {
+        background-color: #f9f9f9
+    }
+
+    .btn {
+        float: right;
+    }
 </style>

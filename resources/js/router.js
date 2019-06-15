@@ -28,6 +28,12 @@ export default new Router({
         component: () => import(/* webpackChunkName: "posts" */ './views/Posts.vue')
     },
     {
+        path: '/posts/:id/edit',
+        name: 'edit-post',
+        props: true,
+        component: () => import(/* webpackChunkName: "posts" */ './views/EditPost.vue')
+    },
+    {
         path: '/posts/:id',
         name: 'post',
         props: true,

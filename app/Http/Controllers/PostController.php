@@ -72,7 +72,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         // Check for correct user
-        if(auth()->user()->id === $post->author) {
+        if(auth()->user()->id === $post->user_id) {
             $post->title = $request->input('title');
             $post->body = $request->input('body');
         } 
@@ -94,7 +94,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         // Check for correct user
-        if(auth()->user()->id === $post->author) {
+        if(auth()->user()->id === $post->user_id) {
             if($post->delete()) {
                 return new PostResource($post);
             }

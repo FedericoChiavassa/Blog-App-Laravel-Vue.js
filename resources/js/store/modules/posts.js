@@ -54,14 +54,26 @@ const actions = {
         const response = await axios.post(
         'api/posts', post, tokenConfig()
         );
-
-        console.log(response);
     
         router.push('/dashboard');
         commit('setMessage', {"success": "Post Created"}); 
       }
       catch(err) {
         commit('setMessage', err.response.data);
+      }
+  },
+  async updatePost({ commit }, post) {
+      try {
+        const response = await axios.put(
+        `/api/posts/${post.id}`, post, tokenConfig()
+        );
+    
+        router.push('/dashboard');
+        commit('setMessage', {"success": "Post Updated"}); 
+      }
+      catch(err) {
+        commit('setMessage', err.response.data);
+        router.push('/posts');
       }
   }
 };

@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .left-nav .router-link-active {
     color: #fff !important
 }
