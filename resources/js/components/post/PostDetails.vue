@@ -10,6 +10,7 @@
                     v-if="validUser()"
                 >Edit Post</b-button>
             <h1 class="mb-4">{{ singlePost.title }}</h1>
+            <b-img src="https://picsum.photos/1024/600/"  alt="postImage"></b-img>
             <p>{{ singlePost.body }}</p>
             <footer class="mb-5">
                 <small>Author: {{ singlePost.author.name }}</small><br>
@@ -59,4 +60,12 @@ export default {
     h1 {
         clear: both;
     }
+
+    img {
+        width: 100%; 
+        height: 300px;
+        object-fit: cover;
+        margin-bottom: 2rem;
+    }
+
 </style>
