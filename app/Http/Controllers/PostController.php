@@ -38,6 +38,15 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->user_id = Auth::guard('api')->user()->id;
+        
+        if ($request->file('image')) {
+            $imageName = $this->saveImage($request);
+        }
+        else {
+            $imageName = "noimage.jpg";
+        }
+
+        $post->image = $imageName;
 
         if($post->save()) {
             return new PostResource($post);
@@ -113,5 +122,27 @@ class PostController extends Controller
         $posts = $user->posts->sortByDesc('created_at');
 
         return PostResource::collection($posts);
+    }
+
+    /**
+     * Upload image
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveImage(Request $request)
+    {
+        request()->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        if ($image = $request->file('image')) {
+            $destinationPath = 'images/';
+            $imageName = date('YmdHis') . $image->getClientOriginalName();
+            $image->move($destinationPath, $imageName);
+            
+            return $imageName;
+        }
+        else {
+            return "noimage.jpg";
+        }
     }
 }

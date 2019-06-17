@@ -3,7 +3,7 @@
         <b-spinner v-if="isLoading" label="Loading..." variant="primary"></b-spinner>
         <b-list-group v-else class="mb-5">
             <b-list-group-item v-for="post in allPosts" :key="post.id">
-                <b-img src="https://picsum.photos/1024/600/"  alt="postImage"></b-img>     
+                <b-img :src="'/images/'+post.image"  alt="postImage"></b-img>     
                 <b-link :to="`/posts/${post.id}`">{{ post.title }}</b-link><br/>
                 <small>written on: {{post.created_at}} - by: {{post.author.name}} </small>
             </b-list-group-item>

@@ -32,6 +32,9 @@ Route::post('login', 'Auth\LoginController@login');
 // Get user info
 Route::get('auth/user', 'Auth\LoginController@getUser');
 
+// Get user info
+Route::post('image', 'PostController@saveImage');
+
 // Protected routes
 Route::group(['middleware' => 'auth:api'], function() {    
     

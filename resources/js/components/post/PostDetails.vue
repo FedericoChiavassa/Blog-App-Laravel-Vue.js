@@ -10,7 +10,7 @@
                     v-if="validUser()"
                 >Edit Post</b-button>
             <h1 class="mb-4">{{ singlePost.title }}</h1>
-            <b-img src="https://picsum.photos/1024/600/"  alt="postImage"></b-img>
+            <b-img :src="'/images/'+singlePost.image" alt="postImage"></b-img>
             <p>{{ singlePost.body }}</p>
             <footer class="mb-5">
                 <small>Author: {{ singlePost.author.name }}</small><br>

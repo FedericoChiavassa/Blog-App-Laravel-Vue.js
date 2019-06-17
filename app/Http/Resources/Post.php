@@ -20,6 +20,7 @@ class Post extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'author' => new UserResource($this->user),
+            'image' => $this->image,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
           ];
