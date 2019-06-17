@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Post;
 use App\Http\Resources\Post as PostResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -104,8 +105,17 @@ class PostController extends Controller
 
         // Check for correct user
         if(auth()->user()->id === $post->user_id) {
-            if($post->delete()) {
-                return new PostResource($post);
+            if($post->image !== "noimage.jpg") {
+                $imagePath = 'images/' . $post->image;
+                $this->removeImage($imagePath);
+                if($post->delete()) {
+                    return new PostResource($post);
+                }
+            }
+            else {
+                if($post->delete()) {
+                    return new PostResource($post);
+                }
             }
         }
     }
@@ -144,5 +154,18 @@ class PostController extends Controller
         else {
             return "noimage.jpg";
         }
+    }
+
+    /**
+     * Remove image
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeImage($imagePath)
+    {
+        if(File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+        return true;
     }
 }
