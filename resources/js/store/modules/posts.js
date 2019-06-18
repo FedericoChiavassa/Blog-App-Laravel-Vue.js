@@ -63,9 +63,11 @@ const actions = {
       }
   },
   async updatePost({ commit }, post) {
+      console.log(post.get('id'));
+      console.log(post.get('title'));
       try {
-        const response = await axios.put(
-        `/api/posts/${post.id}`, post, tokenConfig()
+        const response = await axios.post(
+        `/api/posts/${post.get('id')}`, post, tokenConfig()
         );
     
         router.push('/dashboard');

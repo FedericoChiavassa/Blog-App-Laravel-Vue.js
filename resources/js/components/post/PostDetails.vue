@@ -10,7 +10,7 @@
                     v-if="validUser()"
                 >Edit Post</b-button>
             <h1 class="mb-4">{{ singlePost.title }}</h1>
-            <b-img :src="'/images/'+singlePost.image" alt="postImage"></b-img>
+            <b-img v-if="validImage()" :src="'/images/'+singlePost.image" alt="postImage"></b-img>
             <p>{{ singlePost.body }}</p>
             <footer class="mb-5">
                 <small>Author: {{ singlePost.author.name }}</small><br>
@@ -36,7 +36,10 @@ export default {
         window.history.length > 1
             ? this.$router.go(-1)
             : this.$router.push('/posts')
-        }
+    },
+    validImage() {
+        return this.singlePost.image !== 'noimage.jpg'
+    }
   },
   computed: mapGetters(["singlePost", "isLoading", "user"]),
   created() {

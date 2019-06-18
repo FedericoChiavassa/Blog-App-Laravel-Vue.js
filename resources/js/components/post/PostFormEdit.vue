@@ -27,6 +27,10 @@
                 ></b-form-textarea>
             </b-form-group>
 
+            <b-form-group id="input-group-3" label="You can select an image:" label-for="input-3" class="mt-3">
+                <b-form-file v-model="post.image" class="mt-3" plain></b-form-file>
+            </b-form-group>
+
             <b-button type="submit" variant="primary" class="mt-3">Update Post</b-button>
         </b-form>
         </div>
@@ -44,7 +48,8 @@ export default {
             post: {
                 title: '',
                 body: '',
-                id: ''
+                id: '',
+                image: null
             }
         }
     },
@@ -57,7 +62,12 @@ export default {
                 this.setMessage({"error" : "Unauthorized to edit this post"})
             }
             else {
-                this.updatePost(this.post)
+                const new_post = new FormData()
+                new_post.append('id', this.post.id)
+                new_post.append('image', this.post.image)
+                new_post.append('title', this.post.title)
+                new_post.append('body', this.post.body)
+                this.updatePost(new_post)
             }
         }
     },

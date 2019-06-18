@@ -25,7 +25,11 @@
                 ></b-form-textarea>
             </b-form-group>
 
-            <b-button type="submit" variant="primary" class="mt-3">Create Post</b-button>
+            <b-form-group id="input-group-3" label="You can select an image:" label-for="input-3" class="mt-3">
+                <b-form-file v-model="post.image" class="mt-3" plain></b-form-file>
+            </b-form-group>
+
+            <b-button type="submit" variant="primary" class="mt-4">Create Post</b-button>
         </b-form>
     </div>
 </template>
@@ -39,7 +43,8 @@ export default {
         return {
             post: {
                 title: '',
-                body: ''
+                body: '',
+                image: null
             }
         }
     },
@@ -47,7 +52,11 @@ export default {
         ...mapActions(["createPost"]),
         onSubmit(evt) {
             evt.preventDefault()
-            this.createPost(this.post)
+            const new_post = new FormData()
+            new_post.append('image', this.post.image)
+            new_post.append('title', this.post.title)
+            new_post.append('body', this.post.body)
+            this.createPost(new_post)
         }
     }
 }

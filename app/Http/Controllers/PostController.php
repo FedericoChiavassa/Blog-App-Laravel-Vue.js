@@ -78,6 +78,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return response()->json($request->all(), 400);
+
         // Find post to update
         $post = Post::findOrFail($id);
 
@@ -85,6 +87,11 @@ class PostController extends Controller
         if(auth()->user()->id === $post->user_id) {
             $post->title = $request->input('title');
             $post->body = $request->input('body');
+
+            if ($request->file('image')) {
+                $imageName = $this->saveImage($request);
+                $post->image = $imageName;
+            }     
         } 
 
         if($post->save()) {
