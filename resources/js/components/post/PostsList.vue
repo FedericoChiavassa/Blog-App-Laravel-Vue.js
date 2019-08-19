@@ -44,6 +44,8 @@ export default {
         object-fit: cover;
         float: left;
         margin-right: 2rem;
+        border: 1px solid #dadada;
+        border-radius: 5px;
     }
 
 </style>

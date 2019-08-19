@@ -55,7 +55,7 @@ const actions = {
         'api/posts', post, tokenConfig()
         );
     
-        router.push('/dashboard');
+        router.go(-1);
         commit('setMessage', {"success": "Post Created"}); 
       }
       catch(err) {
@@ -70,7 +70,7 @@ const actions = {
         `/api/posts/${post.get('id')}`, post, tokenConfig()
         );
     
-        router.push('/dashboard');
+        router.go(-1);
         commit('setMessage', {"success": "Post Updated"}); 
       }
       catch(err) {

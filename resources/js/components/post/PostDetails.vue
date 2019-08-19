@@ -30,7 +30,11 @@ export default {
   methods: {
     ...mapActions(["fetchPost", "clearPostState"]),
     validUser() {
-        return this.singlePost.author.id===this.user.id ? true : false
+        if (this.user) {
+            return this.singlePost.author.id===this.user.id ? true : false
+        } else {
+            return false;
+        }
     },
     goBack () {
         window.history.length > 1
@@ -69,6 +73,7 @@ export default {
         height: 300px;
         object-fit: cover;
         margin-bottom: 2rem;
+        border-radius: 5px;
     }
 
 </style>
