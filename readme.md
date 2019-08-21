@@ -4,23 +4,23 @@
 
 ## Quick Start
 
-### Install Dependencies
+#### Install Dependencies
 ``` bash
 composer install
 ```
 
-### Setup .env File
+#### Setup .env File
 ``` bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-### Create Database
+#### Create Database
 Create a database in MySQL with just its name and nothing more.
 
 Inside .env file edit DB_DATABASE, DB_PASSWORD and DB_USERNAME.
 
-### Run Migrations
+#### Run Migrations
 ``` bash
 php artisan migrate
 ```
@@ -30,10 +30,10 @@ If you get an error go to your PHP folder and inside the php.ini file uncomment 
 ```
 Then do a quick server restart.
 
-### Import Posts
+#### Import Posts
 ``` bash
 php artisan db:seed
 ```
 
-### Add Virtual Host
+#### Add Virtual Host
 Add a virtual host if using Apache and you are ready to use the application.
