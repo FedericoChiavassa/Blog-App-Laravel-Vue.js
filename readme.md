@@ -35,5 +35,8 @@ Then do a quick server restart.
 php artisan db:seed
 ```
 
-#### Add Virtual Host
-Add a virtual host if using Apache and you are ready to use the application.
+#### Run server
+``` bash
+php artisan serve
+```
+
