@@ -7,12 +7,6 @@
 #### Install Dependencies
 ``` bash
 composer install
-npm install
-```
-
-### Compile
-``` bash
-npm run dev
 ```
 
 #### Setup .env File
@@ -41,12 +35,15 @@ Then do a quick server restart.
 php artisan db:seed
 ```
 
-#### Add Virtual Host
-
-Recommended: add a virtual host if using Apache and you are ready to use the application.
-
-As an alternative to a virtual host run a server using:
+#### Run Server
+Run a server using:
 ``` bash
 php artisan serve
 ```
-The last option is not recommended because it doesn't let you upload images for your posts.
+As an alternative add a virtual host if using Apache.
+
+If you get an error while trying to create a post go to your PHP folder and inside the php.ini file uncomment the extension:
+``` bash
+;extension=php_fileinfo
+```
+Then do a quick server restart.
