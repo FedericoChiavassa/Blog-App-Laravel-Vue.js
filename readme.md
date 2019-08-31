@@ -1,8 +1,15 @@
 # Blog App - Laravel & Vue.js
 
-> This is a blog application made with Laravel and MySQL at the backend and for the frontend Vue.js and Bootstrap 4.
+> Blog application created with the aim to improve and showcase my skills in working with different technologies including the following.
 
-## Quick Start
+## Technologies
+- Vue.js
+- Vuex
+- Laravel
+- MySql
+- Bootstrap 4
+
+## Getting Started
 
 #### Install Dependencies
 ``` bash
